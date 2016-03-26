@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """Extract an encoded URL from the parameters of a wrapping URL.
 
@@ -7,8 +8,19 @@ your friends, not tracking cookies.
 
 """
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
+import argparse
 import re
-import urlparse
+import sys
+
+try:
+    from urllib import parse as urlparse
+except ImportError:
+    import urlparse
 
 
 # Matching is pretty strong ("protocol?://something" is the minimum).
@@ -37,13 +49,28 @@ def get_urls(url):
                 yield url_match.group()
 
 
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) > 2:
-        print ("Usage: %s '<messy url with encoded urls>"
-               "\n\n'https://goog-fb-adtrack.com/?url=http%3A%2F%2Fwww.youtube.com...'" % sys.argv[0]
-              )
-        sys.exit(1)
+def main(args, usage=''):
+    for url in get_urls(args.url[0]):
+        print(url)
 
-    for url in get_urls(sys.argv[1]):
-        print url
+
+def dispatch_main():
+    parser = argparse.ArgumentParser(prog='cleanurl')
+    parser.add_argument('url',
+                        nargs=1,
+                        help='Messy URL with embedded URLs -- surround with '
+                             'single quotes.')
+    args = parser.parse_args(sys.argv[1:])
+    main(args, usage=parser.format_usage())
+
+
+if __name__ == '__main__':
+    dispatch_main()
+#    if len(sys.argv) > 2:
+#        print("Usage: {} '<messy url with encoded urls>"
+#              "\n'https://adtrack.com/?url=http%3A%2F%2Fwww.youtube.com...'".format(
+#              sys.argv[0]))
+#        sys.exit(1)
+#
+#    for url in get_urls(sys.argv[1]):
+#        print(url)
