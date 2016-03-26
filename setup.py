@@ -13,8 +13,8 @@ with codecs.open(path.join(current_dir, 'README.md'), encoding='utf-8') as f:
 
 
 setup(
-    name='vcardtools',
-    version='0.1.1',
+    name='dont-track-my-bros',
+    version='0.1.0',
     description='Tool to extract encoded URLs from a URL.',
     long_description=long_description,
     url='https://github.com/dmwilcox/dont-track-my-bros',
@@ -38,7 +38,7 @@ setup(
     ],
     entry_points = {
         'console_scripts': [
-            'clean_url = dont_track_my_bros.clean_url:dispatch_main',
+            'cleanurl = dont_track_my_bros.cleanurl:dispatch_main',
         ],
     },
     install_requires = ['argparse', ]
