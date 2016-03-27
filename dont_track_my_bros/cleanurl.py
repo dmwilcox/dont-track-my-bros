@@ -66,11 +66,3 @@ def dispatch_main():
 
 if __name__ == '__main__':
     dispatch_main()
-#    if len(sys.argv) > 2:
-#        print("Usage: {} '<messy url with encoded urls>"
-#              "\n'https://adtrack.com/?url=http%3A%2F%2Fwww.youtube.com...'".format(
-#              sys.argv[0]))
-#        sys.exit(1)
-#
-#    for url in get_urls(sys.argv[1]):
-#        print(url)
